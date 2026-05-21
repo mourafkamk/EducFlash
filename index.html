@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EducFlash — Portail d'accès</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Nunito:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #F0F4FF;
+  --bleu: #2563EB;
+  --bleu-fonce: #1D4ED8;
+  --violet: #7C3AED;
+  --violet-fonce: #6D28D9;
+  --vert: #059669;
+  --texte: #1E293B;
+  --gris: #64748B;
+  --blanc: #FFFFFF;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Nunito',sans-serif; background:var(--bg); color:var(--texte); min-height:100vh; }
+
+/* ===== HERO ===== */
+.hero {
+  background:linear-gradient(135deg,#1D4ED8 0%,#2563EB 45%,#7C3AED 100%);
+  padding:0 24px;
+  position:relative; overflow:hidden;
+}
+.hero::before {
+  content:''; position:absolute; top:-80px; right:-80px;
+  width:350px; height:350px; background:rgba(255,255,255,0.07); border-radius:50%;
+}
+.hero::after {
+  content:''; position:absolute; bottom:-60px; left:-60px;
+  width:250px; height:250px; background:rgba(255,255,255,0.05); border-radius:50%;
+}
+.hero-inner {
+  max-width:900px; margin:0 auto; padding:56px 0 60px;
+  text-align:center; position:relative; z-index:2;
+}
+.hero-badge {
+  display:inline-flex; align-items:center; gap:10px;
+  background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.25);
+  border-radius:50px; padding:8px 22px; margin-bottom:28px;
+}
+.hero-badge span { font-family:'Sora',sans-serif; font-weight:700; font-size:14px; color:rgba(255,255,255,0.92); letter-spacing:1.5px; text-transform:uppercase; }
+.hero h1 { font-family:'Sora',sans-serif; font-size:clamp(2.2rem,6vw,3.4rem); font-weight:800; color:#fff; line-height:1.15; margin-bottom:16px; }
+.hero h1 em { font-style:normal; color:#FCD34D; }
+.hero p { font-size:1.1rem; color:rgba(255,255,255,0.85); font-weight:600; max-width:520px; margin:0 auto 32px; line-height:1.6; }
+.hero-stats {
+  display:inline-flex; gap:32px; background:rgba(255,255,255,0.12);
+  border:1px solid rgba(255,255,255,0.2); border-radius:20px; padding:16px 32px;
+}
+.hero-stat { text-align:center; }
+.hero-stat strong { display:block; font-size:1.5rem; font-weight:900; color:#fff; }
+.hero-stat span { font-size:0.75rem; color:rgba(255,255,255,0.7); font-weight:700; text-transform:uppercase; letter-spacing:.5px; }
+
+/* ===== INFO BAR ===== */
+.info-bar {
+  background:#fff; border-bottom:1px solid #E2EAF8; padding:14px 24px;
+  text-align:center;
+}
+.info-bar p { font-size:0.9rem; color:var(--gris); font-weight:600; }
+.info-bar p strong { color:var(--texte); }
+
+/* ===== MAIN ===== */
+.main { max-width:900px; margin:0 auto; padding:48px 24px 72px; }
+
+.section-title {
+  text-align:center; margin-bottom:40px;
+}
+.section-title h2 { font-family:'Sora',sans-serif; font-size:1.7rem; font-weight:800; margin-bottom:8px; }
+.section-title p { color:var(--gris); font-size:0.97rem; }
+
+/* ===== APP CARDS ===== */
+.cards { display:grid; gap:24px; }
+
+.app-card {
+  background:var(--blanc); border-radius:24px;
+  border:2px solid #E2EAF8;
+  box-shadow:0 4px 24px rgba(37,99,235,0.08);
+  overflow:hidden;
+  transition:transform .25s, box-shadow .25s;
+  animation:fadeUp .5s ease both;
+}
+.app-card:nth-child(2) { animation-delay:.1s; }
+.app-card:nth-child(3) { animation-delay:.2s; }
+.app-card:hover { transform:translateY(-4px); box-shadow:0 12px 40px rgba(37,99,235,0.15); }
+@keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
+.card-body { padding:28px 28px 24px; display:flex; align-items:flex-start; gap:20px; }
+.card-icon {
+  width:64px; height:64px; border-radius:18px; display:flex; align-items:center;
+  justify-content:center; font-size:30px; flex-shrink:0;
+}
+.card-icon.bleu { background:#DBEAFE; }
+.card-icon.violet { background:#EDE9FE; }
+.card-icon.vert { background:#D1FAE5; }
+
+.card-content { flex:1; }
+.card-tag {
+  display:inline-block; padding:3px 10px; border-radius:20px;
+  font-size:0.72rem; font-weight:800; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:8px;
+}
+.card-tag.bleu { background:#DBEAFE; color:var(--bleu); }
+.card-tag.violet { background:#EDE9FE; color:var(--violet); }
+.card-tag.vert { background:#D1FAE5; color:var(--vert); }
+
+.card-title { font-family:'Sora',sans-serif; font-size:1.25rem; font-weight:800; margin-bottom:5px; }
+.card-desc { font-size:0.9rem; color:var(--gris); line-height:1.5; margin-bottom:14px; }
+.card-features { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:0; }
+.card-feature { font-size:0.78rem; font-weight:700; padding:4px 10px; border-radius:16px; background:#F1F5F9; color:var(--gris); }
+
+/* ===== ACCESS BLOCK ===== */
+.access-block {
+  background:#F8FAFF; border-top:2px solid #E2EAF8;
+  padding:20px 28px;
+  display:grid; grid-template-columns:1fr auto; gap:16px; align-items:center;
+}
+.access-block.violet { background:#FAF8FF; border-top-color:#EDE9FE; }
+.access-block.vert { background:#F0FDF9; border-top-color:#A7F3D0; }
+
+.access-info { display:flex; flex-direction:column; gap:10px; }
+.access-row { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+.access-label { font-size:0.78rem; font-weight:800; color:var(--gris); text-transform:uppercase; letter-spacing:.5px; min-width:70px; }
+.access-url {
+  font-family:'JetBrains Mono',monospace; font-size:0.82rem; font-weight:600;
+  color:var(--bleu); background:#DBEAFE; padding:5px 12px; border-radius:8px;
+  word-break:break-all; flex:1;
+}
+.access-url.violet { color:var(--violet); background:#EDE9FE; }
+.access-url.vert { color:var(--vert); background:#D1FAE5; }
+.access-pwd {
+  font-family:'JetBrains Mono',monospace; font-size:0.9rem; font-weight:700;
+  color:#1E293B; background:#F1F5F9; padding:6px 14px; border-radius:8px;
+  border:2px dashed #CBD5E1; display:flex; align-items:center; gap:8px;
+  letter-spacing:1px;
+}
+.pwd-lock { font-size:14px; }
+
+.btn-acceder {
+  display:inline-flex; align-items:center; gap:8px;
+  padding:13px 24px; border-radius:14px; border:none;
+  font-family:'Nunito',sans-serif; font-size:0.92rem; font-weight:800;
+  color:white; cursor:pointer; transition:all .2s; white-space:nowrap;
+  text-decoration:none;
+}
+.btn-acceder.bleu { background:linear-gradient(135deg,var(--bleu),var(--bleu-fonce)); box-shadow:0 4px 14px rgba(37,99,235,0.3); }
+.btn-acceder.bleu:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(37,99,235,0.4); }
+.btn-acceder.violet { background:linear-gradient(135deg,var(--violet),var(--violet-fonce)); box-shadow:0 4px 14px rgba(124,58,237,0.3); }
+.btn-acceder.violet:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(124,58,237,0.4); }
+.btn-acceder.vert { background:linear-gradient(135deg,#059669,#047857); box-shadow:0 4px 14px rgba(5,150,105,0.3); }
+.btn-acceder.vert:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(5,150,105,0.4); }
+
+/* ===== COPY TOAST ===== */
+.toast {
+  position:fixed; bottom:28px; left:50%; transform:translateX(-50%) translateY(20px);
+  background:#1E293B; color:white; padding:12px 24px; border-radius:12px;
+  font-weight:700; font-size:0.9rem; z-index:999;
+  opacity:0; transition:all .3s; pointer-events:none;
+}
+.toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
+
+/* ===== HOW TO ===== */
+.howto {
+  background:#fff; border-radius:20px; padding:32px 36px;
+  border:2px solid #E2EAF8; margin-top:48px;
+  box-shadow:0 2px 12px rgba(37,99,235,0.05);
+}
+.howto h3 { font-family:'Sora',sans-serif; font-size:1.15rem; font-weight:800; margin-bottom:20px; display:flex; align-items:center; gap:10px; }
+.steps { display:flex; flex-direction:column; gap:14px; }
+.step { display:flex; align-items:flex-start; gap:16px; }
+.step-num {
+  width:32px; height:32px; border-radius:50%;
+  background:linear-gradient(135deg,var(--bleu),var(--violet));
+  color:#fff; font-weight:900; font-size:0.85rem;
+  display:flex; align-items:center; justify-content:center; flex-shrink:0;
+}
+.step p { font-size:0.93rem; color:#475569; line-height:1.55; padding-top:5px; }
+.step p strong { color:var(--texte); }
+
+/* ===== FOOTER ===== */
+footer {
+  text-align:center; padding:28px 24px;
+  background:#fff; border-top:1px solid #E2EAF8;
+  font-size:0.85rem; color:var(--gris);
+}
+footer strong { color:var(--texte); }
+
+@media(max-width:640px) {
+  .access-block { grid-template-columns:1fr; }
+  .hero-stats { flex-direction:column; gap:16px; }
+  .card-body { flex-direction:column; }
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">
+      <span>⚡ EducFlash</span>
+    </div>
+    <h1>Tes applications<br><em>d'apprentissage</em> interactif</h1>
+    <p>Quiz, fiches de révision et simulations d'examen pour le primaire et le collège.</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><strong>3</strong><span>Applications</span></div>
+      <div class="hero-stat"><strong>5+</strong><span>Niveaux</span></div>
+      <div class="hero-stat"><strong>∞</strong><span>Accès à vie</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- INFO BAR -->
+<div class="info-bar">
+  <p>👋 Bienvenue ! Retrouve ci-dessous le <strong>lien direct</strong> et le <strong>mot de passe</strong> de chaque application achetée.</p>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <div class="section-title">
+    <h2>Mes applications</h2>
+    <p>Clique sur le bouton "Accéder" pour ouvrir l'app, puis saisis le mot de passe correspondant.</p>
+  </div>
+
+  <div class="cards">
+
+    <!-- APP 1 : PRIMAIRE -->
+    <div class="app-card">
+      <div class="card-body">
+        <div class="card-icon bleu">🎒</div>
+        <div class="card-content">
+          <div class="card-tag bleu">Primaire · CP → CM2</div>
+          <div class="card-title">EducFlash Primaire</div>
+          <div class="card-desc">Quiz interactifs de Maths et Français adaptés à chaque niveau du primaire. XP, scores et retours détaillés pour progresser pas à pas.</div>
+          <div class="card-features">
+            <span class="card-feature">🔢 Maths</span>
+            <span class="card-feature">📚 Français</span>
+            <span class="card-feature">CP · CE1 · CE2 · CM1 · CM2</span>
+            <span class="card-feature">⭐ Système XP</span>
+          </div>
+        </div>
+      </div>
+      <div class="access-block">
+        <div class="access-info">
+          <div class="access-row">
+            <span class="access-label">🔗 Lien</span>
+            <span class="access-url" id="url-primaire">mourafkamk.github.io/EducFlash/primaire.html</span>
+            <button onclick="copyText('https://mourafkamk.github.io/EducFlash/primaire.html','url-primaire')" style="background:none;border:none;cursor:pointer;font-size:16px;" title="Copier">📋</button>
+          </div>
+          <div class="access-row">
+            <span class="access-label">🔑 Mdp</span>
+            <span class="access-pwd"><span class="pwd-lock">🔒</span> <span id="pwd-primaire">primaire2025</span></span>
+            <button onclick="copyText('primaire2025','pwd-primaire')" style="background:none;border:none;cursor:pointer;font-size:16px;" title="Copier">📋</button>
+          </div>
+        </div>
+        <a href="https://mourafkamk.github.io/EducFlash/primaire.html" target="_blank" class="btn-acceder bleu">
+          Accéder →
+        </a>
+      </div>
+    </div>
+
+    <!-- APP 2 : BREVET MATHS -->
+    <div class="app-card">
+      <div class="card-body">
+        <div class="card-icon violet">📐</div>
+        <div class="card-content">
+          <div class="card-tag violet">Collège · Brevet 3ème</div>
+          <div class="card-title">EducFlash Brevet Maths</div>
+          <div class="card-desc">10 chapitres du programme de Maths 3ème : calcul, géométrie, fonctions, statistiques, algorithmique, trigonométrie. Fiches de cours + Brevet Blanc.</div>
+          <div class="card-features">
+            <span class="card-feature">📊 10 chapitres</span>
+            <span class="card-feature">📝 Fiches formules</span>
+            <span class="card-feature">🎯 Brevet Blanc</span>
+            <span class="card-feature">📈 Progression</span>
+          </div>
+        </div>
+      </div>
+      <div class="access-block violet">
+        <div class="access-info">
+          <div class="access-row">
+            <span class="access-label">🔗 Lien</span>
+            <span class="access-url violet" id="url-maths">mourafkamk.github.io/EducFlash/brevet-maths.html</span>
+            <button onclick="copyText('https://mourafkamk.github.io/EducFlash/brevet-maths.html','url-maths')" style="background:none;border:none;cursor:pointer;font-size:16px;" title="Copier">📋</button>
+          </div>
+          <div class="access-row">
+            <span class="access-label">🔑 Mdp</span>
+            <span class="access-pwd"><span class="pwd-lock">🔒</span> <span id="pwd-maths">collegemaths2025</span></span>
+            <button onclick="copyText('collegemaths2025','pwd-maths')" style="background:none;border:none;cursor:pointer;font-size:16px;" title="Copier">📋</button>
+          </div>
+        </div>
+        <a href="https://mourafkamk.github.io/EducFlash/brevet-maths.html" target="_blank" class="btn-acceder violet">
+          Accéder →
+        </a>
+      </div>
+    </div>
+
+    <!-- APP 3 : COLLEGE FRANÇAIS -->
+    <div class="app-card">
+      <div class="card-body">
+        <div class="card-icon vert">📖</div>
+        <div class="card-content">
+          <div class="card-tag vert">Collège · 6ème → Brevet</div>
+          <div class="card-title">EducFlash Collège Français</div>
+          <div class="card-desc">5 niveaux du 6ème au Brevet : grammaire, conjugaison, figures de style, littérature et méthode de rédaction. Fiches détaillées + simulation Brevet.</div>
+          <div class="card-features">
+            <span class="card-feature">📝 Grammaire</span>
+            <span class="card-feature">🔄 Conjugaison</span>
+            <span class="card-feature">✨ Figures de style</span>
+            <span class="card-feature">🎭 Littérature</span>
+          </div>
+        </div>
+      </div>
+      <div class="access-block vert">
+        <div class="access-info">
+          <div class="access-row">
+            <span class="access-label">🔗 Lien</span>
+            <span class="access-url vert" id="url-francais">mourafkamk.github.io/EducFlash/college-francais.html</span>
+            <button onclick="copyText('https://mourafkamk.github.io/EducFlash/college-francais.html','url-francais')" style="background:none;border:none;cursor:pointer;font-size:16px;" title="Copier">📋</button>
+          </div>
+          <div class="access-row">
+            <span class="access-label">🔑 Mdp</span>
+            <span class="access-pwd"><span class="pwd-lock">🔒</span> <span id="pwd-francais">collegefrancais2025</span></span>
+            <button onclick="copyText('collegefrancais2025','pwd-francais')" style="background:none;border:none;cursor:pointer;font-size:16px;" title="Copier">📋</button>
+          </div>
+        </div>
+        <a href="https://mourafkamk.github.io/EducFlash/college-francais.html" target="_blank" class="btn-acceder vert">
+          Accéder →
+        </a>
+      </div>
+    </div>
+
+  </div><!-- /cards -->
+
+  <!-- MODE D'EMPLOI -->
+  <div class="howto">
+    <h3>💡 Comment accéder à une application ?</h3>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <p>Clique sur le bouton <strong>"Accéder →"</strong> de l'application souhaitée. L'app s'ouvre dans un nouvel onglet.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <p>Un écran de connexion apparaît. Saisis le <strong>mot de passe</strong> indiqué dans la carte correspondante ci-dessus.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <p>Appuie sur <strong>Entrée</strong> ou clique sur le bouton pour accéder à l'application. Bonne révision ! 🎉</p>
+      </div>
+      <div class="step">
+        <div class="step-num">💡</div>
+        <p>Tu peux aussi <strong>copier le lien et le mot de passe</strong> avec les boutons 📋 et les envoyer à un ami qui a acheté l'accès.</p>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /main -->
+
+<div class="toast" id="toast">✅ Copié !</div>
+
+<footer>
+  <strong>EducFlash</strong> — Applications éducatives interactives · CP → Brevet
+  <br>Accès à vie · Aucun abonnement requis
+</footer>
+
+<script>
+function copyText(text, elId) {
+  navigator.clipboard.writeText(text).then(() => {
+    const toast = document.getElementById('toast');
+    toast.className = 'toast show';
+    setTimeout(() => toast.className = 'toast', 2000);
+  }).catch(() => {
+    // Fallback
+    const el = document.getElementById(elId);
+    const range = document.createRange();
+    range.selectNode(el);
+    window.getSelection().removeAllRanges();
+    window.getSelection().addRange(range);
+    document.execCommand('copy');
+    window.getSelection().removeAllRanges();
+    const toast = document.getElementById('toast');
+    toast.className = 'toast show';
+    setTimeout(() => toast.className = 'toast', 2000);
+  });
+}
+</script>
+</body>
+</html>
